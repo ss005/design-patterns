@@ -1,4 +1,7 @@
 //This example is taken from tutorialspoint.com
+//
+//Prototype pattern is requied when object creation is very expensive 
+//In that case we use already pre-configured object 
 import java.util.Hashtable;
 abstract class Shape implements Cloneable {
     private String id;

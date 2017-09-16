@@ -1,9 +1,13 @@
+//This example is taken from newthinktank.com
+//This pattern is required if we have constructors with more than 4 parameters (say) (Telescoping constructor pattern)
+//The main difference between factory method and builder pattern is that builder pattern is required if we have many parameters are required for object creation, while factory method is used if object creation is done within a single method .
 interface RobotPlan { public void setRobotHead (String robotHead);
     public void setRobotTorso(String robotTorso);
     public void setRobotArms (String robotArms );
     public void setRobotLegs(String robotLegs);
 }
 
+//The concrete class `
 class Robot implements RobotPlan {
     private String robotHead;
     private String robotTorso;
@@ -49,6 +53,7 @@ interface RobotBuilder {
     public Robot getRobot();
 }
 
+//Builder class 
 class OldRobotBuilder implements RobotBuilder {
     private Robot robot ;
     public OldRobotBuilder() {
@@ -74,6 +79,7 @@ class OldRobotBuilder implements RobotBuilder {
     }
 }
 
+//The Director/Engineer class 
 class RobotEngineer {
     private RobotBuilder robotBuilder;
     
@@ -92,7 +98,6 @@ class RobotEngineer {
         return this.robotBuilder.getRobot();
     }
 }
-
 
 public class BuilderPatternDemo {
     public static void main (String [] args ) {
