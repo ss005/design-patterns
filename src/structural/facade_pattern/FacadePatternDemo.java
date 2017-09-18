@@ -1,49 +1,52 @@
-//This example is taken from newthinktank.com
-//
-package facade_pattern;
-
-class WelcomeToBank {
-    public WelcomeToBank () {
-        System.out.println("Welcome to ABC bank ... ");
-        System.out.println("You can take money if you have in account...");
-    }
-}
-
-class AccountNumberCheck {
-    private int accountNumber ;
-    public int getAccountNumber () {
-        return accountNumber;
-    }
-
-    public boolean isAccountActive (int accountNumToCheck) {
-        if (getAccountNumber () == accountNumToCheck)
-            return true;
-        else 
-            return false;
-         
-   }
-}
-
-class SecurityCodeCheck {
-    private int securityCode = 1234;
-
-    publid int getSecurityCode () {
-        return securityCode ;
-    } 
-    pubkic boolean isCodeCorrect (int secCodeTocheck) {
-        if (getSecurityCode() == seccodeToCheck) 
-            return true;
-        else 
-            return false;
-    }
+interface CallingDevice {
+    public void isNumberValid();
+    public void isNumberExists();
+    public void isEnoughBalance();
+    public void call();
 }
 
 
-class FundCheck {
-    private  double cashInAccout n= 1000.00;
-  
-    public double  getCashInAccount () {
-        return cashInAccount;
+class MobilePhone implements CallingDevice {
+    public void isNumberValid () {
+        //logic to check if number is valid ...suppose the number is valid for now 
+        System.out.println("The number is valid");
     }
-    public 
+    public void isNumberExists() { 
+        //logic to check if number exists  or not ... Suppose for now number is vlaid 
+        System.out.println("The number exists");
+    }
+    public void isEnoughBalance () {
+        //logic to check if there is enough balance to make this call...Suppose for now balance is enough ,,,
+        System.out.println("You have enough balance to make this call");
+    }
+
+    public void call(){
+        isNumberValid();
+        isNumberExists();
+        isEnoughBalance();
+    
+        System.out.println("Making your call...");
+    }
+
+}
+
+class MobilePhoneFacade {
+    protected CallingDevice device ;
+    public MobilePhoneFacade(CallingDevice device) {
+        this.device = device ;
+    }
+    public void makeCall() {
+        this.device.call();
+    }
+        
+}
+
+public class FacadePatternDemo {
+    public static void main (String [] args) {
+        MobilePhoneFacade facade = new MobilePhoneFacade(new MobilePhone());  //Client does not need to know all the hidden implementataion (i.e. underlying subsystems)
+        facade.makeCall();
+    }
+}
+
+
     

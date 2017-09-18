@@ -1,68 +1,61 @@
-// Below example is taken from tutorialpoints.com
 
-interface MediaPlayer {
-    void play(String audioType , String fileName ) ;
+interface ITarget {
+    public void request ();
 }
 
-interface AdvancedMediaPlayer {
-    void play(String fileName );
-}
+class ConcreteTarget implements ITarget {
+    public ConcreteTarget () {
+        //instance initialization code...
+    }
 
-class VlcPlayer implements AdvancedMediaPlayer {
-    public void play(String fileName ) {
-        System.out.println("Playing vlc  file : " + fileName);
+    public void request() {
+        System.out.println("This is US, you will get 120 volts, and 50 Hz frequency..." );
     }
 }
 
-class Mp4Player implements AdvancedMediaPlayer {
-    public void play (String fileName ) {
-        System.out.println("Playing mp4 file :" + fileName);
-    }
-}
- 
-class MediaAdapter implements AdvancedMediaPlayer {
-    protected AdvancedMediaPlayer advancedMediaPlayer ;
-    
-    public MediaAdapter (String audioType ) {
-       if (audioType.equalsIgnoreCase ("vlc")) {
-            advancedMediaPlayer = new VlcPlayer();
-        } else if (audioType.equalsIgnoreCase ("mp4")) {
-            advancedMediaPlayer  = new Mp4Player();
-        }
+interface IAdaptee {
+    public void specificRequest() ;
+} 
+
+class ConcreteAdaptee implements IAdaptee {
+    public ConcreteAdaptee() {
+        //initialization code ...
     }
 
-    @Override 
-    public void play ( String fileName ) {
-            advancedMediaPlayer.play(fileName);
+    public void specificRequest() {
+        System.out.println("This is some specific country, you will get 240 volts, 60 Hz frequency,,, ");
     }
 }
 
-class AudioPlayer implements MediaPlayer {
-    protected MediaAdapter mediaAdapter ;
 
-     public void play(String audioType, String fileName ) {
-        if (audioType.equalsIgnoreCase ("mp3")) {
-           System.out.println("Playing mp3 file... " + fileName);
-       } else if (audioType.equalsIgnoreCase ("vlc") || audioType.equalsIgnoreCase("mp4")) {
-           new MediaAdapter(audioType).play(fileName); 
-        }          
+//Now Client is cpmpatible with ITarget interface and can call request method, but he need 240 volts and 60 Hz frequency,,,
+//For this, we have to create Adapter class ... 
+class Adapter implements ITarget {
+    //composes adaptee 
+    private IAdaptee adaptee ;
+
+    public Adapter (IAdaptee adaptee ) {
+        this.adaptee = adaptee ;
+    }
+
+    public void request () {
+        this.adaptee.specificRequest();
     }
 }
-           
 
+
+
+//Now the client code ...
 
 public class AdapterPatternDemo {
     public static void main (String [] args) {
+        ITarget target  = new ConcreteTarget();
+        target.request();
 
-        AudioPlayer audioPlayer = new AudioPlayer ();
-        audioPlayer.play("mp3", "song1");
-        audioPlayer.play("vlc", "song2");
-        audioPlayer.play("mp4", "song3");
-    
+        ITarget target2 = new Adapter(new ConcreteAdaptee());    
+        target2.request();
     }
 }
-
-
 
 
 
