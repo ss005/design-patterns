@@ -1,7 +1,7 @@
 # design-patterns
 programs on design patterns
 
-creational patterns -> 
+Creational patterns -> 
 ======================
 1. Factory Method : separate a simple logic required for creation of object into a factory method 
 2. Abstract Factory : factory of factories  
