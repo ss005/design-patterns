@@ -1,3 +1,4 @@
+package creational.factory_pattern;
 // Below example is taken from tutorialspoint.com
 //
 interface Shape {
@@ -74,7 +75,7 @@ class ColorFactory {
             return new Red ();
         } else if (colorType.equalsIgnoreCase ("green")) {
             return new Green ();
-        } else if (colorType.equalsIgnoreType("blue")) {
+        } else if (colorType.equalsIgnoreCase("blue")) {
             return new Blue ();
         } else {
             return null;

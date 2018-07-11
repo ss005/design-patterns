@@ -1,3 +1,4 @@
+package creational.prototype_pattern;
 //This example is taken from tutorialspoint.com
 //
 //Prototype pattern is requied when object creation is very expensive 

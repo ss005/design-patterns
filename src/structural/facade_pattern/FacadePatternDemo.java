@@ -1,3 +1,5 @@
+package structural.facade_pattern;
+
 interface CallingDevice {
     public void isNumberValid();
     public void isNumberExists();

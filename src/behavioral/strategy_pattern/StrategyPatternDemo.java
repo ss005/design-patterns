@@ -1,3 +1,5 @@
+package behavioral.strategy_pattern;
+
 //This example is taken from tutorialspoint.com
 //
 interface Strategy {

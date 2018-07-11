@@ -1,3 +1,5 @@
+package creational.singleton_pattern;
+
 //Thsese examples are taken from GeeksForGeeks :
 //link : http://www.geeksforgeeks.org/java-singleton-design-pattern-practices-examples/
 

@@ -1,3 +1,4 @@
+package structural.adapter_pattern;
 
 interface ITarget {
     public void request ();

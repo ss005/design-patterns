@@ -1,3 +1,5 @@
+package structural.decorator_pattern ;
+
 //------------------ Components start here -----------------------
 abstract class Beverage {
     String description = "Unknown Beverage" ;

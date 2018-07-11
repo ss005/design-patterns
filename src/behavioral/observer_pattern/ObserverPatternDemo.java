@@ -1,5 +1,5 @@
 //This example is taken from tutorialspoint.com import java.util.List; import java.util.ArrayList;
-package observer_pattern;
+package behavioral.observer_pattern;
 import java.util.List;
 import java.util.ArrayList;
 class Subject {
