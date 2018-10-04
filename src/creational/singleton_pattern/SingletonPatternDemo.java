@@ -3,12 +3,15 @@ package creational.singleton_pattern;
 //Thsese examples are taken from GeeksForGeeks :
 //link : http://www.geeksforgeeks.org/java-singleton-design-pattern-practices-examples/
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 // 1. Eager Initialization :
 class Singleton {
     //public static instance will be created at the time of loading the class by JVM.
-    public static  Singleton instance = new Singleton ();
-    
-    private Singleton () {
+    public static Singleton instance = new Singleton();
+
+    private Singleton() {
         //private constructor to prevent creating instance by calling new Singleton();
     }
 }
@@ -20,14 +23,15 @@ class Singleton {
 
 //2. Using static block : this is also a sub part of eager initialization .
 class Singleton2 {
-    public static Singleton2 instance ;
-    private Singleton2 () {
+    public static Singleton2 instance;
+
+    private Singleton2() {
         //making constructor private 
     }
-    
+
     //static block to initialise instance 
     {
-        instance = new Singleton2 ();
+        instance = new Singleton2();
     }
 }
 //Pros: 1. very simple to implement . 2. No need to implement getInstance() method, instance can be accessed directly. 3. Exception handling is possible.
@@ -36,14 +40,14 @@ class Singleton2 {
 
 //3. Lazy Intitialization : Object is created only if it is needed .
 class Singleton3 {
-    private static Singleton3 instance ;
-    
-    private Singleton3 () {
+    private static Singleton3 instance;
+
+    private Singleton3() {
     }
-    
-    public static Singleton3  getInstance () {
-        if (instance == null ) {
-            instance = new Singleton3 ();
+
+    public static Singleton3 getInstance() {
+        if (instance == null) {
+            instance = new Singleton3();
         }
         return instance;
     }
@@ -54,14 +58,14 @@ class Singleton3 {
 
 //4. Thread Safe Singleton : singleton property is maintained even if in multithreaded environment .
 class Singleton4 {
-    public static Singleton4 instance ;
+    public static Singleton4 instance;
 
-    private Singleton4 () {
+    private Singleton4() {
     }
 
-    synchronized public static Singleton4 getInstance () {
-        if (instance == null ) {
-            instance =  new Singleton4 ();
+    synchronized public static Singleton4 getInstance() {
+        if (instance == null) {
+            instance = new Singleton4();
         }
         return instance;
     }
@@ -72,20 +76,20 @@ class Singleton4 {
 
 //5. Lazy initialization with double check locking : overcome of syncronisation problem in previous example 
 class Singleton5 {
-   private static Singleton5 instance ;
+    private static Singleton5 instance;
 
-   private Singleton5() { 
-   }
-    
-   public static Singleton5 getInstance () {
-        if (instance == null ) {
-            synchronized(Singleton5.class) {
-                if (instance == null ) {
+    private Singleton5() {
+    }
+
+    public static Singleton5 getInstance() {
+        if (instance == null) {
+            synchronized (Singleton5.class) {
+                if (instance == null) {
                     instance = new Singleton5();
                 }
             }
         }
-        return instance ;
+        return instance;
     }
 }
 
@@ -100,11 +104,11 @@ class Singleton6 {
     }
 
     private static class BillPughSingleton {
-        private static final Singleton6 INSTANCE = new Singleton6 ();
+        private static final Singleton6 INSTANCE = new Singleton6();
     }
-    
-    public static Singleton6 getInstance () {
-        return BillPughSingleton.INSTANCE ;
+
+    public static Singleton6 getInstance() {
+        return BillPughSingleton.INSTANCE;
     }
 }
 
@@ -113,9 +117,38 @@ class Singleton6 {
 //It is most widely used approach as it doesn't use synchronization .
 
 public class SingletonPatternDemo {
-    public static void main (String [] args ) {
-       System.out.println("Thid Bill Pugh Singleton object hash code is : " + Singleton6.getInstance()); 
+    public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        Singleton6 singleton6 = Singleton6.getInstance();
+        System.out.println("Thid Bill Pugh Singleton object hash code is : " + singleton6);
+        //Singleton6 singleton61 = Singleton6.getInstance();
+
+        Constructor[] constructors = Singleton6.class.getDeclaredConstructors();
+        System.out.println(constructors);
+        for (Constructor constructor1 : constructors) {
+            constructor1.setAccessible(true);
+            Singleton6 singleton61= (Singleton6) constructor1.newInstance();
+
+            break;
+            //singleton61.B
+        }
+
     }
 }
+
+//Forget lazy initialization, it's too problematic. This is the simplest solution:
+
+//I agree with @Dan Dayer, this is example it is lazy initialization. If there were other methods on the class, then it might be...depends on which static method gets called first. (Imagine a public static void doSomething() in class A being called first--A is instanced, but not used.)
+class A {
+
+    private static final A INSTANCE = new A();
+
+    private A() {
+    }
+
+    public static A getInstance() {
+        return INSTANCE;
+    }
+}
+
 
 
