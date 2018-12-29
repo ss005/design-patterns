@@ -1,9 +1,10 @@
 //This example is taken from tutorialspoint.com import java.util.List; import java.util.ArrayList;
-package behavioral.observer_pattern;
-import java.util.List;
+package behavioral.observer.pattern;
+
 import java.util.ArrayList;
+import java.util.List;
 class Subject {
-    public List< Observer> observers = new ArrayList<Observer>();
+    public List< Observer> observers = new ArrayList<>();
     public int stat;
 
     public void attach (Observer observer ) {
@@ -29,7 +30,7 @@ class Subject {
 
 abstract class Observer {
     Subject subject ;
-    public void update () {};
+    public void update () {}
 }
 
 class BinaryObserver extends Observer {

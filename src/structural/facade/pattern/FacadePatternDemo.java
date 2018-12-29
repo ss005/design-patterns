@@ -1,10 +1,10 @@
-package structural.facade_pattern;
+package structural.facade.pattern;
 
 interface CallingDevice {
-    public void isNumberValid();
-    public void isNumberExists();
-    public void isEnoughBalance();
-    public void call();
+    void isNumberValid();
+    void isNumberExists();
+    void isEnoughBalance();
+    void call();
 }
 
 

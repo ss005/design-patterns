@@ -1,9 +1,9 @@
-package behavioral.strategy_pattern;
+package behavioral.strategy.pattern;
 
 //This example is taken from tutorialspoint.com
 //
 interface Strategy {
-    public int doOperation (int numm1, int num2);
+    int doOperation(int numm1, int num2);
 }
 
 class OperationAdd implements Strategy {
@@ -26,7 +26,7 @@ class OperationMultiply implements Strategy {
 
 
 class Context {
-    Strategy strategy ;
+    private Strategy strategy ;
     
     Context (Strategy strategy ) {
         this.strategy = strategy ;

@@ -1,4 +1,4 @@
-package creational.abstract_factory_pattern;
+package creational.abstractt.factory.pattern;
 
 //This code is taken from tutorialspoint.com
 interface Shape {

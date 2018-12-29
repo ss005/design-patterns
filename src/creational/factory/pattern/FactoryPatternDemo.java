@@ -1,4 +1,4 @@
-package creational.factory_pattern;
+package creational.factory.pattern;
 // Below example is taken from tutorialspoint.com
 //
 interface Shape {
@@ -88,8 +88,9 @@ class ColorFactory {
 
 public class FactoryPatternDemo {
     public static void main (String [] args ) {
-       Shape shape =  ShapeFactory.getShape("circle");;
-       Color color =  ColorFactory.getColor("Red");; shape.draw();
+       Shape shape =  ShapeFactory.getShape("circle");
+        Color color =  ColorFactory.getColor("Red");
+        shape.draw();
         color.fill();
     }
 }    
